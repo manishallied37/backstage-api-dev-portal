@@ -3,7 +3,12 @@ app:
   baseUrl: http://127.0.0.1:3000
 
 organization:
-  name: My Company
+  name: Allied Globetech LLP
+
+kong:
+  instances:
+    - id: kong-instance01
+      apiBaseUrl: ${KONG_URL}
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -43,13 +48,13 @@ integrations:
     #   apiBaseUrl: https://ghe.example.net/api/v3
     #   token: ${GHE_TOKEN}
 
-proxy:
-  ### Example for how to add a proxy endpoint for the frontend.
-  ### A typical reason to do this is to handle HTTPS and CORS for internal services.
-  # endpoints:
-  #   '/test':
-  #     target: 'https://example.com'
-  #     changeOrigin: true
+#proxy:
+### Example for how to add a proxy endpoint for the frontend.
+### A typical reason to do this is to handle HTTPS and CORS for internal services.
+# endpoints:
+#   '/test':
+#     target: 'https://example.com'
+#     changeOrigin: true
 
 # Reference documentation http://backstage.io/docs/features/techdocs/configuration
 # Note: After experimenting with basic setup, use CI/CD to generate docs
@@ -65,7 +70,7 @@ techdocs:
 auth:
   environment: development # eg: production|staging|review|develop
   session:
-    secret: ${SALT}
+    secret: ${SECRET_SALT(64)}
 
   providers:
     ldap:
@@ -74,9 +79,9 @@ auth:
           resolvers:
             - resolver: usernameMatchingUserEntityName
         ldapAuthenticationOptions:
-          userSearchBase: "ou=users,dc=ns,dc=allied"
+          userSearchBase: "${DOMAIN}"
           usernameAttribute: "uid"
-          adminDn: "cn=admin,dc=ns,dc=allied"
+          adminDn: "${DOMAIN}"
           adminPassword: "${PASSWORD}"
 
           ldapOpts:
@@ -87,6 +92,7 @@ auth:
       development:
         clientId: ${CLIENT_ID}
         clientSecret: ${SECRET}
+        sessionDuration: { hours: 24 }
 
     google:
       development:
@@ -98,8 +104,8 @@ auth:
           - email
           - profile
 
-scaffolder:
-  # see https://backstage.io/docs/features/software-templates/configuration for software template options
+#scaffolder:
+# see https://backstage.io/docs/features/software-templates/configuration for software template options
 
 catalog:
   orphanStrategy: keep
@@ -109,11 +115,11 @@ catalog:
         target: "${LDAP_URL}"
 
         bind:
-          dn: "cn=admin,dc=ns,dc=allied"
+          dn: "${DOMAIN}"
           secret: "${PASSWORD}"
 
         users:
-          dn: "ou=users,dc=ns,dc=allied"
+          dn: "${DOMAIN}"
           options:
             filter: "(uid=*)"
             scope: sub
@@ -145,8 +151,8 @@ catalog:
       rules:
         - allow: [User, Group]
 
-kubernetes:
-  # see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options
+#kubernetes:
+# see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options
 
 # see https://backstage.io/docs/permissions/getting-started for more on the permission framework
 permission:

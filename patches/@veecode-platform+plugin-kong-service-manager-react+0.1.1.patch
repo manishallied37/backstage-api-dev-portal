@@ -1,0 +1,35 @@
+diff --git a/node_modules/@veecode-platform/plugin-kong-service-manager-react/dist/components/PluginImage.esm.js b/node_modules/@veecode-platform/plugin-kong-service-manager-react/dist/components/PluginImage.esm.js
+index 847bab4..fb5b525 100644
+--- a/node_modules/@veecode-platform/plugin-kong-service-manager-react/dist/components/PluginImage.esm.js
++++ b/node_modules/@veecode-platform/plugin-kong-service-manager-react/dist/components/PluginImage.esm.js
+@@ -7,18 +7,18 @@ const PluginImage = ({
+   className,
+   alt
+ }) => {
+-  let imageSrc;
+-  try {
+-    const imageLoad = require(`../assets/plugins/kong-inc_${pluginSlug}.png`);
+-    if (imageLoad) {
+-      imageSrc = imageLoad;
+-    } else {
+-      imageSrc = require(`../assets/plugins/${pluginSlug}.png`);
+-    }
+-  } catch (err) {
+-    imageSrc = Default;
+-  }
+-  return /* @__PURE__ */ jsx(Box, { component: "img", src: imageSrc, alt, className });
++  // let imageSrc;
++  // try {
++  //   const imageLoad = require(`../assets/plugins/kong-inc_${pluginSlug}.png`);
++  //   if (imageLoad) {
++  //     imageSrc = imageLoad;
++  //   } else {
++  //     imageSrc = require(`../assets/plugins/${pluginSlug}.png`);
++  //   }
++  // } catch (err) {
++  //   imageSrc = Default;
++  // }
++  return /* @__PURE__ */ jsx(Box, { component: "img", src: Default, alt, className });
+ };
+ 
+ export { PluginImage };

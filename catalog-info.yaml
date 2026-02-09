@@ -11,3 +11,18 @@ spec:
   type: website
   owner: john@example.com
   lifecycle: experimental
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "Component A"
+  description: "An example"
+  annotations:
+    kong-manager/service-name: test-service
+    kong-manager/instance: kong-instance01
+
+spec:
+  type: service
+  lifecycle: prod
+  owner: "devops"

@@ -39,3 +39,17 @@ spec:
     message ExampleMessage {
       string example = 1;
     };
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "ComponentA"
+  description: "An example"
+  annotations:
+    kong-manager/service-name: test-service
+    kong-manager/instance: kong-instance01
+
+spec:
+  type: service
+  lifecycle: dev
+  owner: guests

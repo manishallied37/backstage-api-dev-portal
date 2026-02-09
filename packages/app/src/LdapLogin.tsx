@@ -11,12 +11,19 @@ import {
 } from '@material-ui/core';
 import { LdapAuthFrontendPage } from '@immobiliarelabs/backstage-plugin-ldap-auth';
 
-const LdapLogin = (props: any) => {
+type Props = {
+    props: any;
+    onBack: () => void;
+};
+
+const LdapLogin = ({ props, onBack }: Props) => {
     return (
-        <LdapAuthFrontendPage
-            {...props}
-            provider="ldap"
-        />
+        <Box height="100vh">
+            <LdapAuthFrontendPage
+                {...props}
+                provider="ldap"
+            />
+        </Box>
     );
 };
 

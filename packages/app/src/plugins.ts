@@ -1,0 +1,1 @@
+export { kongServiceManagerPlugin } from '@veecode-platform/plugin-kong-service-manager';

@@ -38,8 +38,6 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 import { NotificationsPage } from '@backstage/plugin-notifications';
 import { SignalsDisplay } from '@backstage/plugin-signals';
 import { CustomSignInPage } from './CustomSignInPage';
-import { providers } from './identityProviders';
-import { LdapAuthFrontendPage } from '@immobiliarelabs/backstage-plugin-ldap-auth';
 
 const app = createApp({
   apis,

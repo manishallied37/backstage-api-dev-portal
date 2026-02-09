@@ -7,6 +7,7 @@ backend.add(import('./authModuleGoogleProvider'));
 backend.add(import('./authModuleGithubProvider'));
 backend.add(import('@immobiliarelabs/backstage-plugin-ldap-auth-backend'));
 backend.add(import('@backstage/plugin-catalog-backend-module-ldap'));
+backend.add(import('@veecode-platform/plugin-kong-service-manager-backend'));
 // backend.add(createSamlRouter());
 
 backend.add(import('@backstage/plugin-app-backend'));
