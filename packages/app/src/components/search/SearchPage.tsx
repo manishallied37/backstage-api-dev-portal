@@ -78,7 +78,6 @@ const SearchPage = () => {
                   label="Entity"
                   name="name"
                   values={async () => {
-                    // Return a list of entities which are documented.
                     const { items } = await catalogApi.getEntities({
                       fields: ['metadata.name'],
                       filter: {

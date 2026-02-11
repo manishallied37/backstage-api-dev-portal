@@ -23,7 +23,7 @@ export default createBackendModule({
                         async signInResolver(
                             { result: { fullProfile } },
                             ctx,
-                            ) {
+                        ) {
                             const email = fullProfile?.emails?.[0]?.value;
 
                             if (!email) {
@@ -31,6 +31,15 @@ export default createBackendModule({
                             }
 
                             const userId = email.split('@')[0];
+                            let role = 'user';
+
+                            if (email.endsWith('@mycompany.com')) {
+                                role = 'admin';
+                            }
+
+                            if (email === 'cto@mycompany.com') {
+                                role = 'superuser';
+                            }
 
                             const userEntityRef = stringifyEntityRef({
                                 kind: 'User',

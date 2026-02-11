@@ -147,27 +147,27 @@ const overviewContent = (
 
 const serviceEntityPage = (
   <EntityLayout>
-    <EntityLayout.Route path="/" title="Overview">
+    {/* <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
-    </EntityLayout.Route>
+    </EntityLayout.Route> */}
 
-    <EntityLayout.Route path="/ci-cd" title="CI/CD">
-      {cicdContent}
-    </EntityLayout.Route>
+    {/* <EntityLayout.Route path="/ci-cd" title="CI/CD">
+      {cicdContent} 
+    </EntityLayout.Route> */}
 
-    <EntityLayout.Route path="/kong" title="Kong">
+    <EntityLayout.Route path="/kong" title="APIs">
       <KongServiceManagerContent />
     </EntityLayout.Route>
 
-    <EntityLayout.Route
+    {/* <EntityLayout.Route
       path="/kubernetes"
       title="Kubernetes"
       if={isKubernetesAvailable}
     >
       <EntityKubernetesContent />
-    </EntityLayout.Route>
+    </EntityLayout.Route> */}
 
-    <EntityLayout.Route path="/api" title="API">
+    {/* <EntityLayout.Route path="/api" title="API">
       <Grid container spacing={3} alignItems="stretch">
         <Grid item md={6}>
           <EntityProvidedApisCard />
@@ -176,9 +176,9 @@ const serviceEntityPage = (
           <EntityConsumedApisCard />
         </Grid>
       </Grid>
-    </EntityLayout.Route>
+    </EntityLayout.Route> */}
 
-    <EntityLayout.Route path="/dependencies" title="Dependencies">
+    {/* <EntityLayout.Route path="/dependencies" title="Dependencies">
       <Grid container spacing={3} alignItems="stretch">
         <Grid item md={6}>
           <EntityDependsOnComponentsCard variant="gridItem" />
@@ -187,7 +187,7 @@ const serviceEntityPage = (
           <EntityDependsOnResourcesCard variant="gridItem" />
         </Grid>
       </Grid>
-    </EntityLayout.Route>
+    </EntityLayout.Route> */}
 
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
@@ -268,7 +268,7 @@ const apiPage = (
     <EntityLayout.Route path="/" title="Overview">
       <Grid container spacing={3}>
         {entityWarningContent}
-        <Grid item md={6}>
+        {/* <Grid item md={6}>
           <EntityAboutCard />
         </Grid>
         <Grid item md={6} xs={12}>
@@ -276,7 +276,7 @@ const apiPage = (
         </Grid>
         <Grid item md={4} xs={12}>
           <EntityLinksCard />
-        </Grid>
+        </Grid> */}
         <Grid container item md={12}>
           <Grid item md={6}>
             <EntityProvidingComponentsCard />
@@ -288,13 +288,19 @@ const apiPage = (
       </Grid>
     </EntityLayout.Route>
 
-    <EntityLayout.Route path="/definition" title="Definition">
+    <EntityLayout.Route
+      if={isKongServiceManagerAvailable}
+      path="/kong" title="APIs">
+      <KongServiceManagerContent />
+    </EntityLayout.Route>
+
+    {/* <EntityLayout.Route path="/definition" title="Definition">
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <EntityApiDefinitionCard />
         </Grid>
       </Grid>
-    </EntityLayout.Route>
+    </EntityLayout.Route> */}
   </EntityLayout>
 );
 

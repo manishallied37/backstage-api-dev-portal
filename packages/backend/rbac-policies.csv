@@ -1,0 +1,10 @@
+# ---- Catalog ----
+p, role:default/platform-reader, catalog-entity, read, allow
+
+# ---- Kong ----
+p, role:default/platform-reader, kong.service, read, allow
+p, role:default/platform-reader, kong.routes, read, allow
+p, role:default/platform-reader, kong.read.available.plugins, read, allow
+
+# ---- User mapping ----
+g, user:default/manish, role:default/platform-reader

@@ -33,8 +33,15 @@ backend:
   # This is for local development only, it is not recommended to use this in production
   # The production database configuration is stored in app-config.production.yaml
   database:
-    client: better-sqlite3
-    connection: ":memory:"
+    # client: better-sqlite3
+    # connection: ":memory:"
+    client: pg
+    connection:
+      host: ${HOST}
+      port: ${PORT}
+      user: ${USERNAME}
+      password: ${PASSWORD}
+      database: ${DATABASE}
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
@@ -70,7 +77,12 @@ techdocs:
 auth:
   environment: development # eg: production|staging|review|develop
   session:
-    secret: ${SECRET_SALT(64)}
+    secret: ${SECRET_SALT}
+
+  cookies:
+    secure: false
+    sameSite: lax
+    field: backstage-token
 
   providers:
     ldap:
@@ -92,7 +104,6 @@ auth:
       development:
         clientId: ${CLIENT_ID}
         clientSecret: ${SECRET}
-        sessionDuration: { hours: 24 }
 
     google:
       development:
@@ -158,3 +169,18 @@ catalog:
 permission:
   # setting this to `false` will disable permissions
   enabled: true
+  # rbac:
+  #   pluginsWithPermission:
+  #     - catalog
+  #     - scaffolder
+  #     - permission
+  #     - kong
+  #   admin:
+  #     users:
+  # #       - name: user:default/${username}
+  # rbac:
+  #   pluginsWithPermission:
+  #     - catalog
+  #     - kong
+  #   policies-csv-file: ${CSV_FILE_PATH}
+  #   policyFileReload: true

@@ -1,28 +1,14 @@
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: api-portal
-  description: An example of a Backstage application.
-  # Example for optional annotations
-  # annotations:
-  #   github.com/project-slug: backstage/backstage
-  #   backstage.io/techdocs-ref: dir:.
-spec:
-  type: website
-  owner: john@example.com
-  lifecycle: experimental
+# ---
+# apiVersion: backstage.io/v1alpha1
+# kind: Component
+# metadata:
+#   name: "APIs"
+#   description: "Kong APIS"
+#   annotations:
+#     kong-manager/service-name: test-service
+#     kong-manager/instance: kong-instance01
 
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: "Component A"
-  description: "An example"
-  annotations:
-    kong-manager/service-name: test-service
-    kong-manager/instance: kong-instance01
-
-spec:
-  type: service
-  lifecycle: prod
-  owner: "devops"
+# spec:
+#   type: service
+#   lifecycle: prod
+#   owner: "devops"

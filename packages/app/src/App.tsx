@@ -28,7 +28,6 @@ import { Root } from './components/Root';
 import {
   AlertDisplay,
   OAuthRequestDialog,
-  SignInPage,
 } from '@backstage/core-components';
 import { createApp } from '@backstage/app-defaults';
 import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
@@ -65,7 +64,7 @@ const app = createApp({
 
 const routes = (
   <FlatRoutes>
-    <Route path="/" element={<Navigate to="catalog" />} />
+    <Route path="/" element={<Navigate to="api-list" />} />
     <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"
@@ -83,7 +82,7 @@ const routes = (
       </TechDocsAddons>
     </Route>
     <Route path="/create" element={<ScaffolderPage />} />
-    <Route path="/api-docs" element={<ApiExplorerPage />} />
+    <Route path="/api-list" element={<ApiExplorerPage />} />
     <Route
       path="/catalog-import"
       element={

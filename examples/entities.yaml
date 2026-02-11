@@ -19,11 +19,14 @@ spec:
   system: examples
   providesApis: [example-grpc-api]
 ---
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-api
+#https://backstage.io/docs/features/software-catalog/descriptor-format#kind-api
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: example-grpc-api
+  annotations:
+    kong-manager/service-name: test-service
+    kong-manager/instance: kong-instance01
 spec:
   type: grpc
   lifecycle: experimental
@@ -39,17 +42,3 @@ spec:
     message ExampleMessage {
       string example = 1;
     };
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: "ComponentA"
-  description: "An example"
-  annotations:
-    kong-manager/service-name: test-service
-    kong-manager/instance: kong-instance01
-
-spec:
-  type: service
-  lifecycle: dev
-  owner: guests

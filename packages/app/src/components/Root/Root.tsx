@@ -29,53 +29,53 @@ import { MyGroupsSidebarItem } from '@backstage/plugin-org';
 import GroupIcon from '@material-ui/icons/People';
 import { NotificationsSidebarItem } from '@backstage/plugin-notifications';
 
-const useSidebarLogoStyles = makeStyles({
-  root: {
-    width: sidebarConfig.drawerWidthClosed,
-    height: 3 * sidebarConfig.logoHeight,
-    display: 'flex',
-    flexFlow: 'row nowrap',
-    alignItems: 'center',
-    marginBottom: -14,
-  },
-  link: {
-    width: sidebarConfig.drawerWidthClosed,
-    marginLeft: 24,
-  },
-});
+// const useSidebarLogoStyles = makeStyles({
+//   root: {
+//     width: sidebarConfig.drawerWidthClosed,
+//     height: 3 * sidebarConfig.logoHeight,
+//     display: 'flex',
+//     flexFlow: 'row nowrap',
+//     alignItems: 'center',
+//     marginBottom: -14,
+//   },
+//   link: {
+//     width: sidebarConfig.drawerWidthClosed,
+//     marginLeft: 24,
+//   },
+// });
 
-const SidebarLogo = () => {
-  const classes = useSidebarLogoStyles();
-  const { isOpen } = useSidebarOpenState();
+// const SidebarLogo = () => {
+//   const classes = useSidebarLogoStyles();
+//   const { isOpen } = useSidebarOpenState();
 
-  return (
-    <div className={classes.root}>
-      <Link to="/" underline="none" className={classes.link} aria-label="Home">
-        {isOpen ? <LogoFull /> : <LogoIcon />}
-      </Link>
-    </div>
-  );
-};
+//   return (
+//     <div className={classes.root}>
+//       <Link to="/" underline="none" className={classes.link} aria-label="Home">
+//         {isOpen ? <LogoFull /> : <LogoIcon />}
+//       </Link>
+//     </div>
+//   );
+// };
 
 export const Root = ({ children }: PropsWithChildren<{}>) => (
   <SidebarPage>
     <Sidebar>
-      <SidebarLogo />
+      {/* <SidebarLogo /> */}
       <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
         <SidebarSearchModal />
       </SidebarGroup>
       <SidebarDivider />
       <SidebarGroup label="Menu" icon={<MenuIcon />}>
         {/* Global nav, not org-specific */}
-        <SidebarItem icon={HomeIcon} to="catalog" text="Home" />
+        {/* <SidebarItem icon={HomeIcon} to="catalog" text="Home" />
         <MyGroupsSidebarItem
           singularTitle="My Group"
           pluralTitle="My Groups"
           icon={GroupIcon}
-        />
-        <SidebarItem icon={ExtensionIcon} to="api-docs" text="APIs" />
+        /> */}
+        <SidebarItem icon={ExtensionIcon} to="api-list" text="API Catalog" />
         <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
-        <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
+        {/* <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." /> */}
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>
