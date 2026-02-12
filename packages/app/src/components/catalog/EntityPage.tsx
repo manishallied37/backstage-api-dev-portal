@@ -278,9 +278,9 @@ const apiPage = (
           <EntityLinksCard />
         </Grid> */}
         <Grid container item md={12}>
-          <Grid item md={6}>
+          {/* <Grid item md={6}>
             <EntityProvidingComponentsCard />
-          </Grid>
+          </Grid> */}
           <Grid item md={6}>
             <EntityConsumingComponentsCard />
           </Grid>

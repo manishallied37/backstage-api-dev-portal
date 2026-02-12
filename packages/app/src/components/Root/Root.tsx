@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
+import SecurityIcon from '@material-ui/icons/Security';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
 import LogoFull from './LogoFull';
 import LogoIcon from './LogoIcon';
@@ -75,6 +76,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         /> */}
         <SidebarItem icon={ExtensionIcon} to="api-list" text="API Catalog" />
         <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
+        <SidebarItem icon={SecurityIcon} to="user-register" text="Register User" />
         {/* <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." /> */}
         {/* End global nav */}
         <SidebarDivider />
@@ -84,7 +86,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       </SidebarGroup>
       <SidebarSpace />
       <SidebarDivider />
-      <NotificationsSidebarItem />
+      {/* <NotificationsSidebarItem /> */}
       <SidebarDivider />
       <SidebarGroup
         label="Settings"

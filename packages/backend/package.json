@@ -51,6 +51,7 @@
     "@backstage/plugin-signals-backend": "^0.3.11",
     "@backstage/plugin-techdocs-backend": "^2.1.4",
     "@immobiliarelabs/backstage-plugin-ldap-auth-backend": "^4.3.1",
+    "@internal/backstage-plugin-admin-backend": "workspace:^",
     "@types/passport-saml": "^1.1.7",
     "@veecode-platform/backstage-plugin-kong-service-manager-common": "^0.5.3",
     "@veecode-platform/plugin-kong-service-manager-backend": "^0.4.1",

@@ -41,7 +41,6 @@ backend.add(import('@backstage/plugin-catalog-backend-module-logs'));
 backend.add(import('@backstage/plugin-permission-backend'));
 // backend.add(import('@backstage-community/plugin-rbac-backend'));
 backend.add(import('./userOnlyPermissionModule'));
-
 // See https://backstage.io/docs/permissions/getting-started for how to create your own permission policy
 // backend.add(
 //   import('@backstage/plugin-permission-backend-module-allow-all-policy'),
@@ -65,4 +64,5 @@ backend.add(import('@backstage/plugin-kubernetes-backend'));
 backend.add(import('@backstage/plugin-notifications-backend'));
 backend.add(import('@backstage/plugin-signals-backend'));
 
+backend.add(import('@internal/backstage-plugin-admin-backend'));
 backend.start();
