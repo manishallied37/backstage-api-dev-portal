@@ -14,20 +14,6 @@ import { policyExtensionPoint } from '@backstage/plugin-permission-node/alpha';
 import { kongServiceReadPermission, kongRoutesReadPermission, kongReadAvailablePluginsPermission } from '@veecode-platform/backstage-plugin-kong-service-manager-common';
 
 class CustomPermissionPolicy implements PermissionPolicy {
-    // async handle(request: PolicyQuery): Promise<PolicyDecision> {
-    //     const permissionName = request.permission.name;
-
-    //     if (
-    //         permissionName === kongRoutesReadPermission.name ||
-    //         permissionName === kongServiceReadPermission.name ||
-    //         permissionName === catalogEntityReadPermission.name ||
-    //         permissionName === kongReadAvailablePluginsPermission.name
-    //     ) {
-    //         return { result: AuthorizeResult.ALLOW };
-    //     }
-
-    //     return { result: AuthorizeResult.DENY };
-    // }
     async handle(
         request: PolicyQuery,
         user?: PolicyQueryUser,

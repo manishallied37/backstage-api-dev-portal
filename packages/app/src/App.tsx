@@ -38,6 +38,9 @@ import { NotificationsPage } from '@backstage/plugin-notifications';
 import { SignalsDisplay } from '@backstage/plugin-signals';
 import { CustomSignInPage } from './CustomSignInPage';
 import { LdapConfigPage } from '@internal/backstage-plugin-admin';
+import { DbSetupPage } from '@internal/backstage-plugin-db-setup';
+import React, { useEffect, useState } from 'react';
+import { useApi, discoveryApiRef } from '@backstage/core-plugin-api';
 
 const app = createApp({
   apis,
@@ -66,6 +69,7 @@ const app = createApp({
 const routes = (
   <FlatRoutes>
     <Route path="/" element={<Navigate to="api-list" />} />
+    {/* <Route path="/db-setup" element={<DbSetupPage />} /> */}
     <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"
@@ -112,3 +116,49 @@ export default app.createRoot(
     </AppRouter>
   </>,
 );
+
+// const AppRoot = () => {
+//   const discoveryApi = useApi(discoveryApiRef);
+
+//   const [loading, setLoading] = useState(true);
+//   const [isSetupComplete, setIsSetupComplete] = useState(false);
+
+//   useEffect(() => {
+//     const checkSetup = async () => {
+//       try {
+//         const baseUrl = await discoveryApi.getBaseUrl('db-setup');
+//         const res = await fetch(`${baseUrl}/status`);
+//         const data = await res.json();
+
+//         setIsSetupComplete(data.setupComplete);
+//       } catch (err) {
+//         console.error('Setup check failed', err);
+//       } finally { 
+//         setLoading(false);
+//       }
+//     };
+
+//     checkSetup();
+//   }, [discoveryApi]);
+
+//   if (loading) {
+//     return <div>Loading...</div>;
+//   }
+
+//   if (!isSetupComplete) {
+//     return <DbSetupPage />;
+//   }
+
+//   return (
+//     <>
+//       <AlertDisplay />
+//       <OAuthRequestDialog />
+//       <SignalsDisplay />
+//       <AppRouter>
+//         <Root>{routes}</Root>
+//       </AppRouter>
+//     </>
+//   );
+// };
+
+// export default app.createRoot(<AppRoot />);

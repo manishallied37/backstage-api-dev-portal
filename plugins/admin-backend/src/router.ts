@@ -24,6 +24,35 @@ export async function createRouter({
     entityRef: z.string().optional(),
   });
 
+  // async function assertSuperUser(
+  //   req: express.Request,
+  //   httpAuthParam: HttpAuthService,
+  // ) {
+  //   const credentials = await httpAuthParam.credentials(req, {
+  //     allow: ['user'],
+  //   });
+
+  //   const principal = credentials.principal;
+
+  //   if (!principal || principal.type !== 'user') {
+  //     throw new InputError('Not authorized');
+  //   }
+
+  //   const ownershipRefs =
+  //     (principal as any).ownershipEntityRefs ??
+  //     (principal as any).claims?.ent ??
+  //     [];
+  //   console.log('GROUPS:', ownershipRefs);
+
+  //   const isSuperUser = ownershipRefs.some((g: string) =>
+  //     g.endsWith('/superusers'),
+  //   );
+
+  //   if (!isSuperUser) {
+  //     throw new InputError('Superuser access required');
+  //   }
+  // }
+
   router.post('/todos', async (req, res) => {
     const parsed = todoSchema.safeParse(req.body);
     if (!parsed.success) {
@@ -46,21 +75,8 @@ export async function createRouter({
   });
 
   router.post('/ldap/test', async (req, res) => {
+    // await assertSuperUser(req, httpAuth);
     const { dn, password, url } = req.body;
-    const credentials = await httpAuth.credentials(req);
-    // const principal = credentials.principal;
-
-    // if (!principal) {
-    //   return res.status(403).json({ error: 'Not authorized' });
-    // }
-
-    // const user: PolicyQueryUser = await permissionClient.getUser(req);
-    // const ownershipRefs = principal?.identity?.ownershipEntityRefs ?? [];
-    // console.log('Ownership Refs:', ownershipRefs);
-
-    // if (!ownershipRefs.includes('group:default/superusers')) {
-    //   return res.status(403).json({ error: 'Not authorized' });
-    // }
 
     const client = ldap.createClient({ url });
 
@@ -83,6 +99,7 @@ export async function createRouter({
   });
 
   router.post('/ldap/check-ou', async (req, res) => {
+    // await assertSuperUser(req, httpAuth);
     const { url, bindDn, bindPassword, ouDn } = req.body;
     const client = ldap.createClient({ url });
 
@@ -136,6 +153,7 @@ export async function createRouter({
 
 
   router.post('/ldap/create', async (req, res) => {
+    // await assertSuperUser(req, httpAuth);
     const { url, bindDn, bindPassword, userDn, attributes } = req.body;
 
     const client = ldap.createClient({ url });
@@ -163,7 +181,6 @@ export async function createRouter({
       client.unbind();
       return res.json({ success: true, dn: userDn });
     } catch (error: any) {
-      // LDAP-specific error handling
       return res.status(500).json({ success: false, error: error.message });
     }
   });

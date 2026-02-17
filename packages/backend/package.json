@@ -52,6 +52,7 @@
     "@backstage/plugin-techdocs-backend": "^2.1.4",
     "@immobiliarelabs/backstage-plugin-ldap-auth-backend": "^4.3.1",
     "@internal/backstage-plugin-admin-backend": "workspace:^",
+    "@internal/backstage-plugin-db-setup-backend": "workspace:^",
     "@types/passport-saml": "^1.1.7",
     "@veecode-platform/backstage-plugin-kong-service-manager-common": "^0.5.3",
     "@veecode-platform/plugin-kong-service-manager-backend": "^0.4.1",
@@ -65,10 +66,12 @@
   },
   "devDependencies": {
     "@backstage/cli": "^0.35.3",
+    "@backstage/plugin-catalog-node": "^1.20.1",
     "@types/express": "^5",
     "@types/js-yaml": "^4",
     "@types/passport": "^0",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "node-fetch": "^3.3.2"
   },
   "files": [
     "dist"

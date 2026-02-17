@@ -29,6 +29,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import { MyGroupsSidebarItem } from '@backstage/plugin-org';
 import GroupIcon from '@material-ui/icons/People';
 import { NotificationsSidebarItem } from '@backstage/plugin-notifications';
+import { identityApiRef, useApi } from '@backstage/core-plugin-api';
+import { useEffect, useState } from 'react';
 
 // const useSidebarLogoStyles = makeStyles({
 //   root: {
@@ -58,44 +60,66 @@ import { NotificationsSidebarItem } from '@backstage/plugin-notifications';
 //   );
 // };
 
-export const Root = ({ children }: PropsWithChildren<{}>) => (
-  <SidebarPage>
-    <Sidebar>
-      {/* <SidebarLogo /> */}
-      <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
-        <SidebarSearchModal />
-      </SidebarGroup>
-      <SidebarDivider />
-      <SidebarGroup label="Menu" icon={<MenuIcon />}>
-        {/* Global nav, not org-specific */}
-        {/* <SidebarItem icon={HomeIcon} to="catalog" text="Home" />
+// export const Root = ({ children }: PropsWithChildren<{}>) => (
+export const Root = ({ children }: PropsWithChildren<{}>) => {
+  const identityApi = useApi(identityApiRef);
+
+  const [isSuperUser, setIsSuperUser] = useState(false);
+
+  useEffect(() => {
+    identityApi.getBackstageIdentity().then(identity => {
+      const groups = identity.ownershipEntityRefs ?? [];
+      const superUser = groups.some(g => g.endsWith('/superusers'));
+      setIsSuperUser(superUser);
+    });
+  }, [identityApi]);
+
+  return (
+    <SidebarPage>
+      <Sidebar>
+        {/* <SidebarLogo /> */}
+        <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
+          <SidebarSearchModal />
+        </SidebarGroup>
+        <SidebarDivider />
+        <SidebarGroup label="Menu" icon={<MenuIcon />}>
+          {/* Global nav, not org-specific */}
+          {/* <SidebarItem icon={HomeIcon} to="catalog" text="Home" />
         <MyGroupsSidebarItem
           singularTitle="My Group"
           pluralTitle="My Groups"
           icon={GroupIcon}
         /> */}
-        <SidebarItem icon={ExtensionIcon} to="api-list" text="API Catalog" />
-        <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
-        <SidebarItem icon={SecurityIcon} to="user-register" text="Register User" />
-        {/* <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." /> */}
-        {/* End global nav */}
+          <SidebarItem icon={ExtensionIcon} to="api-list" text="API Catalog" />
+          <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
+          {/* <SidebarItem icon={SecurityIcon} to="user-register" text="Register User" /> */}
+          {isSuperUser && (
+            <SidebarItem
+              icon={SecurityIcon}
+              to="user-register"
+              text="Register User"
+            />
+          )}
+          {/* <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." /> */}
+          {/* End global nav */}
+          <SidebarDivider />
+          <SidebarScrollWrapper>
+            {/* Items in this group will be scrollable if they run out of space */}
+          </SidebarScrollWrapper>
+        </SidebarGroup>
+        <SidebarSpace />
         <SidebarDivider />
-        <SidebarScrollWrapper>
-          {/* Items in this group will be scrollable if they run out of space */}
-        </SidebarScrollWrapper>
-      </SidebarGroup>
-      <SidebarSpace />
-      <SidebarDivider />
-      {/* <NotificationsSidebarItem /> */}
-      <SidebarDivider />
-      <SidebarGroup
-        label="Settings"
-        icon={<UserSettingsSignInAvatar />}
-        to="/settings"
-      >
-        <SidebarSettings />
-      </SidebarGroup>
-    </Sidebar>
-    {children}
-  </SidebarPage>
-);
+        {/* <NotificationsSidebarItem /> */}
+        <SidebarDivider />
+        <SidebarGroup
+          label="Settings"
+          icon={<UserSettingsSignInAvatar />}
+          to="/settings"
+        >
+          <SidebarSettings />
+        </SidebarGroup>
+      </Sidebar>
+      {children}
+    </SidebarPage>
+  )
+};
