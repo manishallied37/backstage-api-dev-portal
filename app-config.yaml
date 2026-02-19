@@ -8,7 +8,7 @@ organization:
 kong:
   instances:
     - id: kong-instance01
-      apiBaseUrl: ${KONG_URL}
+      apiBaseUrl: ${KONG_ADMIN_URL}
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -39,9 +39,9 @@ backend:
     connection:
       host: ${PG_HOST}
       port: ${PG_PORT}
-      user: ${PG_ADMINSER}
-      password: ${PG_ADMINPASSWORD}
-      database: ${PG_ADMINDB}
+      user: ${PG_USER}
+      password: ${PG_PASSWORD}
+      database: ${PG_DATABASE}
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
@@ -77,7 +77,7 @@ techdocs:
 auth:
   environment: development # eg: production|staging|review|develop
   session:
-    secret: ${SALT_COOKIE_SECRET32BIT}
+    secret: ${COOKIE_SECRET_SALT}
 
   cookies:
     secure: false
@@ -91,10 +91,10 @@ auth:
           resolvers:
             - resolver: emailMatchingUserEntityProfileEmail
         ldapAuthenticationOptions:
-          userSearchBase: "${CN_NAME}"
+          userSearchBase: "ou=users,dc=ns,dc=allied"
           usernameAttribute: "uid"
-          adminDn: "${ADMIN_CN_NAME}"
-          adminPassword: "${ADMIN_PASSWORD}"
+          adminDn: "${LDAP_ADMIN_DN}"
+          adminPassword: "${LDAP_ADMIN_PASSWORD}"
 
           ldapOpts:
             url: "${LDAP_URL}"
@@ -102,16 +102,16 @@ auth:
               rejectUnauthorized: false
     github:
       development:
-        clientId: ${CLIENT_ID}
-        clientSecret: ${CLIENT_SECRET}
+        clientId: ${GITHUB_CLIENT_ID}
+        clientSecret: ${GITHUB_CLIENT_SECRET}
         scope:
           - read:user
           - user:email
 
     google:
       development:
-        clientId: ${CLIENT_ID}
-        clientSecret: ${CLIENT_SECRET}
+        clientId: ${GOOGLE_CLIENT_ID}
+        clientSecret: ${GOOGLE_CLIENT_ID}
         sessionDuration: { hours: 24 }
         scope:
           - openid
@@ -129,17 +129,17 @@ catalog:
         target: "${LDAP_URL}"
 
         bind:
-          dn: "${CN_NAME}"
-          secret: "${ADMIN_PASSWORD}"
+          dn: "${LDAP_ADMIN_DN}"
+          secret: "${LDAP_ADMIN_PASSWORD}"
 
         users:
-          dn: "${USER_DN_NAME}"
+          dn: "${LDAP_USER_DN}"
           options:
             filter: "(uid=*)"
             scope: sub
 
         groups:
-          - dn: "${USER_GROUP_NAME}"
+          - dn: "${LDAP_GROUP_DN}"
             options:
               filter: "(objectClass=groupOfNames)"
               scope: sub

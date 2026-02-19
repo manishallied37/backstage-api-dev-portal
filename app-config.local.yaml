@@ -6,8 +6,8 @@ backend:
   database:
     client: pg
     connection:
-      host: ${HOST}
-      port: ${PORT}
-      user: ${USERNAME}
-      password: ${PASSWORD}
-      database: ${DATABASE}
+      host: ${PG_HOST}
+      port: ${PG_PORT}
+      user: ${PG_USER}
+      password: ${PG_PASSWORD}
+      database: ${PG_DATABASE}
